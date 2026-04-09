@@ -8,9 +8,9 @@ jobs:
         uses: actions/checkout@v4
       - name: Setup Python
         uses: actions/setup-python@v5
-          # we nention what version of python is should use
-          with:
-            python-version: '3.12'
+        # we nention what version of python is should use
+        with:
+          python-version: '3.12'
       - name: Install Dependencies
         run: |
           # The recommended way to install cfgrib and dependencies is via conda
@@ -35,7 +35,4 @@ jobs:
           # commit
           git commit -m "Modified Feed"
           # push
-          git push
-          
-          
-          
+          git push  

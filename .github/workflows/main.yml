@@ -13,8 +13,7 @@ jobs:
             python-version: '3.12'
       - name: Install Dependencies
         run: |
-          # The recommended way to install cfgrib and dependencies is via conda
-          # but for a simple case, pip can work if system eccodes is present
+          # upgrade pip
           python -m pip install --upgrade pip
           # install the dependencies specified in requirements.txt
           pip install -r requirements.txt

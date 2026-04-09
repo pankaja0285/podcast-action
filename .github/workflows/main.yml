@@ -1,0 +1,41 @@
+name: Generate Podcast Feeds
+on: [push]
+jobs: 
+  build: 
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v5
+          # we nention what version of python is should use
+          with:
+            python-version: '3.12'
+      - name: Install Dependencies
+        run: |
+          # The recommended way to install cfgrib and dependencies is via conda
+          # but for a simple case, pip can work if system eccodes is present
+          python -m pip install --upgrade pip
+          # install the dependencies specified in requirements.txt
+          pip install -r requirements.txt
+      - name: Run Feed Generator
+        run: 
+          chmod +x ./podcast_gen.sh
+          ./podcast_gen.sh
+      - name: Push Repo
+        run: |
+          # We need to have all the things to be done, as its creating a new machine for us,
+          # installing dependencies etc., 
+          # we need to specify config
+          git config user.name github-actions
+          # below, you could put your own email
+          git config user.email github-actions@github.com
+          # add all the files
+          git add .
+          # commit
+          git commit -m "Modified Feed"
+          # push
+          git push
+          
+          
+          

@@ -11,7 +11,7 @@ jobs:
       # instead we are going to instruct to run the generator and give what repo to use in the uses and instead of 
       # specifying a version we just mention what branch to run on (here we are using main)
       # So, until we create a release, we can run any other sort of test action, like podcast-generator, 
-      # by using this nomenclature. TRY 2 dockerfile
+      # by using this nomenclature. TRY 3 dockerfile
       - name: Run Feed Generator
         uses: pankaja0285/podcast-generator@main
 

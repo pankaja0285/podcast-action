@@ -6,32 +6,42 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-      - name: Setup Python
-        uses: actions/setup-python@v5
-        # we nention what version of python is should use
-        with:
-          python-version: '3.12'
-      - name: Install Dependencies
-        run: |
-          # upgrade pip
-          python -m pip install --upgrade pip
-          # install the dependencies specified in requirements.txt
-          pip install -r requirements.txt
+
+      # We don't to create the Generator here shown in the commented section, as we have created a separate Generator ,
+      # instead we are going to instruct to run the generator and give what repo to use in the uses and instead of 
+      # specifying a version we just mention what branch to run on (here we are using main)
+      # So, until we create a release, we can run any other sort of test action, like podcast-generator, by using this nomenclature
       - name: Run Feed Generator
-        run: 
-          chmod +x ./podcast_gen.sh
-          ./podcast_gen.sh
-      - name: Push Repo
-        run: |
-          # We need to have all the things to be done, as its creating a new machine for us,
-          # installing dependencies etc., 
-          # we need to specify config
-          git config user.name github-actions
-          # below, you could put your own email
-          git config user.email github-actions@github.com
-          # add all the files
-          git add .
-          # commit
-          git commit -m "Modified Feed"
-          # push
-          git push  
+        uses: pankaja0285/podcast-generator@main
+
+      # **************************************************************************************************
+      # NOTE: Below is commented out to just keep as an FYI
+      # - name: Setup Python
+      #   uses: actions/setup-python@v5
+      #   # we mention what version of python is should use
+      #   with:
+      #     python-version: '3.12'
+      # - name: Install Dependencies
+      #   run: |
+      #     # upgrade pip
+      #     python -m pip install --upgrade pip
+      #     # install the dependencies specified in requirements.txt
+      #     pip install -r requirements.txt
+      # - name: Run Feed Generator
+      #   run: 
+      #     chmod +x ./podcast_gen.sh
+      #     ./podcast_gen.sh
+      # - name: Push Repo
+      #   run: |
+      #     # We need to have all the things to be done, as its creating a new machine for us,
+      #     # installing dependencies etc., 
+      #     # we need to specify config
+      #     git config user.name github-actions
+      #     # below, you could put your own email
+      #     git config user.email github-actions@github.com
+      #     # add all the files
+      #     git add .
+      #     # commit
+      #     git commit -m "Modified Feed"
+      #     # push
+      #     git push  

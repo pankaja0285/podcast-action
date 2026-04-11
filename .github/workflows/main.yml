@@ -11,7 +11,7 @@ jobs:
       # instead we are going to instruct to run the generator and give what repo to use in the uses and instead of 
       # specifying a version we just mention what branch to run on (here we are using main)
       # So, until we create a release, we can run any other sort of test action, like podcast-generator, 
-      # by using this nomenclature. TRY 8 dockerfile with PyYaml==6.0.1 and python 3.12
+      # by using this nomenclature. New Dockerfile with PyYaml==6.0.1 and python 3.12 - WORKS
       - name: Run Feed Generator
         uses: pankaja0285/podcast-generator@main
 
